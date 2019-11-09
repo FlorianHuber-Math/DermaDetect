@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DermaDetect</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+  <style>
+  body {
+    position: relative;
+  }
+  /*#section1 {padding-top:70px;height:1000px; color: black; background-image:url('/img1.jpg');}*/
+	#section1 {padding-top:70px;height:1000px; color: black; background-color:white;}
+  #section2 {padding-top:70px;height:1000px;color: black; background-color: #5AE1F8;}
+  #section3 {padding-top:70px;height:1000px;color: black; background-color: white;}
+  #section4 {padding-top:70px;height:1000px;color: black; background-color: #5AE1F8;}
+
+	input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid red;
+  border-radius: 4px;
+}
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid red;
+  border-radius: 4px;
+}
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#section1">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#section2">Payment</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#section3">About us</a>
+    </li>
+		<li class="nav-item">
+      <a class="nav-link" href="#section3">Contact</a>
+    </li>
+  </ul>
+</nav>
+<div  id="section1" class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+<h1 align="center"> DermaDetect</h1>
+<h3 align="center"> Upload a photo of a birth mark/skin lesion and we will tell you if you if it's malignent</h3>
+
+        <div style=" float: left;width:33%;">
+
+
+
+                	 <div class="container">
+                		 {% if s %}
+                			 <div class="alert alert-success">
+                				 <h2>{{s}}</h2>
+                			 </div>
+                		 {% endif %}
+                		 {% if sr %}
+                			 <div class="alert alert-success">
+                				 <h2>{{sr}}</h2>
+                			 </div>
+                		 {% endif %}
+
+
+                		 {% if us %}
+                			 <div class="alert alert-danger">
+                				 <h2>{{us}}</h2>
+                			 </div>
+                		 {% endif %}
+                		 {% if sp %}
+                			 <div class="alert alert-success">
+                				 <h2>{{sp}}</h2>
+                			 </div>
+                		 {% endif %}
+                		 {% if up %}
+                			 <div class="alert alert-success">
+                				 <h2>{{up}}</h2>
+                			 </div>
+                		 {% endif %}
+                		 <form action="/" method="post"  style="width: 300px; float:left; height:100px; ">
+                			 <h2>Please sign in</h2>
+                			 <label for="inputEmail">Email address</label>
+                			 <input type="email" id="inputEmail" name="name" autocomplete="off" placeholder="Email address"  style="background-color:white;
+                              border: solid 1px #6E6E6E;
+                              height: 30px;
+                              font-size:18px;
+                              vertical-align:9px;color:#bbb"  required autofocus>
+                			 <label for="inputPassword">Password</label>
+                			 <input type="password" id="inputPassword" name="pass"  autocomplete="off" placeholder="Password" style="background-color:white;
+                              border: solid 1px #6E6E6E;
+                              height: 30px;
+                              font-size:18px;
+                              vertical-align:9px;color:#bbb"  required>
+                			 <div class="checkbox">
+                				 <label>
+                					 <input type="checkbox" value="remember-me"> Remember me
+                				 </label>
+                			 </div>
+                			<button class="btn btn-lg btn-primary btn-block" type="submit" name="product" value="Sign in">
+                				<input type="hidden" name="vote" value="Sign in"/>
+                				Sign in</button>
+
+                			<button class="btn btn-lg btn-primary btn-block" type="submit" name="product" value="Sign up">
+                				<input type="hidden" name="vote" value="Register"/>Register</button>
+                				<button class="btn btn-lg btn-primary btn-block" type="submit" name="product" value="Forgot">
+                					<input type="hidden" name="vote" value="Forgot"/>Forgot my password</button>
+                		 </form>
+                		<form action="/pay" method="POST" id="payment-form" style="display: none; text-align: center;">
+                				<h3 class="h4 text-white mb-4">You need to pay for this service!</h3>
+                				<script
+                						src="https://checkout.stripe.com/checkout.js"
+                						class="stripe-button"
+                						data-key="{{ pub_key }}"
+                						data-amount="2099"
+                						data-name="DermaDetect"
+                						data-description="Payment"
+                						data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                						data-locale="auto"
+                				></script>
+                		</form>
+                		<form action="/pay" method="POST" id="payment-form" style="display: none; text-align: center;">
+                																			 <h3 class="h4 text-white mb-4">You need to pay for this service!</h3>
+                																			 <script
+                																					 src="https://checkout.stripe.com/checkout.js"
+                																					 class="stripe-button"
+                																					 data-key="{{ pub_key }}"
+                																					 data-amount="2099"
+                																					 data-name="DermaDetect"
+                																					 data-description="Payment"
+                																					 data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                																					 data-locale="auto"
+                																			 ></script>
+                																	 </form>
+                																	   </div>
+                								        </div>
+                                        <div style = "float: left;  width:60%;">
+                 											<iframe width="500" height="300" style="margin-top:+100px;margin-left:+100px"
+                																src="https://www.youtube.com/embed/HGG1_pT7mSY">
+                																</iframe>   <!--<img src="{{ user_image }}"> <img src="../img1.jpg" /></div>-->
+                                        </div>
+
+
+
+</div>
+
+<div  id="section2" class="container-fluid" data-offset="300">
+	<div class="container">
+                 <h2 class="section-title mb-3 text-center" data-aos="fade-down" data-aos-delay="500">Pricing</h2>
+                 <div class="card-deck mb-3" style="margin-top: 60px;">
+                     <div class="card mb-4 box-shadow" data-aos="fade-right" data-aos-delay="500">
+                         <div class="card-header text-center">
+                             <h4 class="my-0 font-weight-normal" style="color:;">Free</h4>
+                         </div>
+                         <div class="card-body">
+                             <h1 class="card-title pricing-card-title text-center">
+                                 $0
+                                 <small class="text-muted">/ mo</small>
+                             </h1>
+                             <hr>
+                             <ul class="list-unstyled mt-3 mb-4">
+                                 <li  class="text-muted">Basic feature</li>
+
+
+                             </ul>
+                             <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+                         </div>
+                     </div>
+                     <div class="card mb-4 box-shadow" data-aos="fade-up" data-aos-delay="500">
+                         <div class="card-header text-center">
+                             <h4 class="my-0 font-weight-normal" style="color:black;">Donate</h4>
+                         </div>
+                         <div class="card-body">
+                             <h1 class="card-title pricing-card-title text-center" style="color:black;">
+                                 $5
+                                 <small class="text-muted"></small>
+                             </h1>
+                             <hr>
+                             <ul class="list-unstyled mt-3 mb-4">
+                                 <li class="text-muted"><i class="fa fa-check"></i> basic feature</li>
+                                 <li class="text-muted"><i class="fa fa-check"></i> the developer gets a coffee</li>
+                             </ul>
+														 <center>
+														 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+																		<input type="hidden" name="cmd" value="_donations" />
+																		<input type="hidden" name="business" value="KXHX9SY9LUBUG" />
+																		<input type="hidden" name="currency_code" value="EUR" />
+																		<input type="image" src="https://www.paypalobjects.com/en_US/AT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+																		<img alt="" border="0" src="https://www.paypal.com/en_AT/i/scr/pixel.gif" width="1" height="1" />
+																		</form>
+                																	 </center>
+                         </div>
+                     </div>
+                     <div class="card mb-4 box-shadow" data-aos="fade-left" data-aos-delay="500">
+                         <div class="card-header text-center">
+                             <h4 class="my-0 font-weight-normal">Free</h4>
+                         </div>
+                         <div class="card-body">
+                             <h1 class="card-title pricing-card-title text-center" style="color:black;">
+                                 $100
+                                 <small class="text-muted">/ mo</small>
+                             </h1>
+                             <hr>
+                             <ul class="list-unstyled mt-3 mb-4">
+                                 <li class="text-muted"><i class="fa fa-check"></i> basic features</li>
+                                 <li class="text-muted"><i class="fa fa-check"></i> API access</li>
+                                 <li class="text-muted"><i class="fa fa-check"></i> Email support</li>
+                                 <li class="text-muted"><i class="fa fa-check"></i> Android alpha app (once finished)</li>
+                             </ul>
+                             <button type="button" class="btn btn-lg btn-block btn-primary" onClick="document.getElementById('section4').scrollIntoView();">Contact Us</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+</div>
+<div id="section3" class="container-fluid" data-offset="300">
+	<div class="container">
+							 <div class="row">
+									 <div class="col-md-4">
+											 <h3 data-aos="fade-up" data-aos-delay="100">About DermaDetect</h3>
+													<p data-aos="fade-up" data-aos-delay="100">
+															DermaDetect is an artificial intelligence classification service for skin cancer.
+															Just make a picture of the area you want to check and upload it.
+															DermaDetect is not professioanl medical advice, but only a self check alter system.
+															We don't take responsibility for any misdiagnose of the software.
+													</p>
+										</div>
+						  </div>
+			</div>
+	 </div>
+
+
+<div id="section4" class="container-fluid" data-offset="300">
+	<div class="container">
+			<div class="row justify-content-center">
+					<div class="col-md-7">
+							<h2 class="section-title mb-3">Message Us</h2>
+							<p class="mb-5"></p>
+							<form  data-aos="fade" action="mailto:test@test.com" method="get" enctype="text/plain">
+									<div class="form-group row">
+											<div class="col-md-6 mb-3 mb-lg-0">
+													<input type="text" class="form-control" placeholder="First name">
+											</div>
+											<div class="col-md-6">
+													<input type="text" class="form-control" placeholder="Last name">
+											</div>
+									</div>
+									<div class="form-group row">
+											<div class="col-md-12">
+													<input type="text" class="form-control" placeholder="Subject">
+											</div>
+									</div>
+									<div class="form-group row">
+											<div class="col-md-12">
+													<input type="email" class="form-control" placeholder="Email">
+											</div>
+									</div>
+									<div class="form-group row">
+											<div class="col-md-12">
+													<textarea class="form-control" id="" cols="30" rows="10" placeholder="Write your message here."></textarea>
+											</div>
+									</div>
+									<div class="form-group row">
+											<div class="col-md-6">
+													<input type="submit" class="btn btn-primary py-3 px-5 btn-block btn-pill" value="Send Message">
+											</div>
+									</div>
+							</form>
+					</div>
+			</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+  // Add scrollspy to <body>
+  $('body').scrollspy({target: ".navbar", offset: 50});
+
+  // Add smooth scrolling on all links inside the navbar
+  $("#myNavbar a").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    }  // End if
+  });
+});
+</script>
+<script src="https://js.stripe.com/v3"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<script>
+   AOS.init();
+</script>
+</body>
+</html>
