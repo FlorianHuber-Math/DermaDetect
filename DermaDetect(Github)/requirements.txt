@@ -1,8 +1,9 @@
 flask
-gunicorn
+gunicorn==19.4.5
 numpy
-fastai
+fastai==1.0.52
 requests
-pyrebase
-PIL
+pyrebase4
+
+
 
